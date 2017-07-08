@@ -1,5 +1,6 @@
 package com.zoha.loan.calculator;
 
+import com.zoha.loan.calculator.interest.CompoundInterestCalculator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,10 +20,10 @@ public class CompoundInterestCalculatorTest {
     @Test
     public void calculatePayment() {
         double initialAmount = 1_000;
-        double rate = 0.1;
+        double rate = 0.07;
         int periodMonths = 36;
 
-        assertEquals(calculator.calculatePayment(initialAmount, rate, periodMonths), 1348.18, PRECISION);
+        assertEquals(calculator.calculateMonthlyPayment(initialAmount, rate, periodMonths), 30.88, PRECISION);
     }
 
 }
