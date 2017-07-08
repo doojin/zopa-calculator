@@ -11,13 +11,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class LoanCalculationArgumentsValidatorTest {
+public class ArgumentValidatorTest {
 
-    private LoanCalculationArgumentsValidator validator;
+    private ArgumentValidator validator;
 
     @Before
     public void setUp() {
-        validator = new LoanCalculationArgumentsValidator();
+        validator = new ArgumentValidator();
     }
 
     @Test

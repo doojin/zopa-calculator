@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class LoanCalculationArgumentsValidator implements Validator<LoanCalculationArguments> {
+public class ArgumentValidator implements Validator<LoanCalculationArguments> {
 
     private static final int AMOUNT_MIN = 1_000;
     private static final int AMOUNT_MAX = 15_000;
