@@ -23,7 +23,7 @@ public class CompoundInterestCalculatorTest {
         double rate = 0.07;
         int periodMonths = 36;
 
-        assertEquals(calculator.calculateMonthlyPayment(initialAmount, rate, periodMonths), 30.88, PRECISION);
+        assertEquals(30.88, calculator.calculateMonthlyPayment(initialAmount, rate, periodMonths), PRECISION);
     }
 
 }
