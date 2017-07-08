@@ -1,4 +1,4 @@
-package com.zoha.loan.model;
+package com.zopa.loan.model;
 
 public class Offer {
 

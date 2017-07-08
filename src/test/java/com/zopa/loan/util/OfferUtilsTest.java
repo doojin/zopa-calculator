@@ -1,6 +1,6 @@
-package com.zoha.loan.util;
+package com.zopa.loan.util;
 
-import com.zoha.loan.model.Offer;
+import com.zopa.loan.model.Offer;
 import org.junit.Test;
 
 import java.util.List;

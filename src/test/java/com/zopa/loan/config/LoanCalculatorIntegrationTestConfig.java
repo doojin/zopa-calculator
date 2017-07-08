@@ -1,8 +1,8 @@
-package com.zoha.loan.config;
+package com.zopa.loan.config;
 
-import com.zoha.loan.calculator.LoanCalculator;
-import com.zoha.loan.calculator.interest.CompoundInterestCalculator;
-import com.zoha.loan.calculator.interest.InterestCalculator;
+import com.zopa.loan.calculator.LoanCalculator;
+import com.zopa.loan.calculator.interest.CompoundInterestCalculator;
+import com.zopa.loan.calculator.interest.InterestCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

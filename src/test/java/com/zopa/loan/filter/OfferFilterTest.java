@@ -1,6 +1,6 @@
-package com.zoha.loan.filter;
+package com.zopa.loan.filter;
 
-import com.zoha.loan.model.Offer;
+import com.zopa.loan.model.Offer;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
-package com.zoha.loan.calculator;
+package com.zopa.loan.calculator;
 
-import com.zoha.loan.calculator.interest.CompoundInterestCalculator;
+import com.zopa.loan.calculator.interest.CompoundInterestCalculator;
 import org.junit.Before;
 import org.junit.Test;
 

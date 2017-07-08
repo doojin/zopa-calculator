@@ -1,8 +1,8 @@
-package com.zoha.loan.calculator;
+package com.zopa.loan.calculator;
 
-import com.zoha.loan.config.LoanCalculatorIntegrationTestConfig;
-import com.zoha.loan.model.Loan;
-import com.zoha.loan.model.Offer;
+import com.zopa.loan.config.LoanCalculatorIntegrationTestConfig;
+import com.zopa.loan.model.Loan;
+import com.zopa.loan.model.Offer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

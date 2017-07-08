@@ -1,9 +1,9 @@
-package com.zoha.loan.calculator;
+package com.zopa.loan.calculator;
 
-import com.zoha.loan.calculator.interest.InterestCalculator;
-import com.zoha.loan.model.Loan;
-import com.zoha.loan.model.Offer;
-import com.zoha.loan.util.OfferUtils;
+import com.zopa.loan.calculator.interest.InterestCalculator;
+import com.zopa.loan.model.Loan;
+import com.zopa.loan.model.Offer;
+import com.zopa.loan.util.OfferUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

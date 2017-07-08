@@ -1,4 +1,4 @@
-package com.zoha.loan.calculator.interest;
+package com.zopa.loan.calculator.interest;
 
 import org.springframework.stereotype.Component;
 

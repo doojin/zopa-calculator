@@ -1,6 +1,6 @@
-package com.zoha.loan.filter;
+package com.zopa.loan.filter;
 
-import com.zoha.loan.model.Offer;
+import com.zopa.loan.model.Offer;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
