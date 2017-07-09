@@ -1,4 +1,4 @@
-package com.zopa.loan.message;
+package com.zopa.loan.sender;
 
 import org.springframework.stereotype.Component;
 

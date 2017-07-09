@@ -1,4 +1,4 @@
-package com.zopa.loan.message;
+package com.zopa.loan.sender;
 
 public interface MessageSender {
 
