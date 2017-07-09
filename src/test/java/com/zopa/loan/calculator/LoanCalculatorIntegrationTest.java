@@ -10,10 +10,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = LoanCalculatorIntegrationTestConfig.class)
@@ -28,9 +31,10 @@ public class LoanCalculatorIntegrationTest {
     public void calculate_oneOffer() {
         List<Offer> offers = singletonList(new Offer(0.07, 1_000));
 
-        Loan loan = loanCalculator.calculate(offers, 36);
+        Optional<Loan> loan = loanCalculator.calculate(1_000, offers, 36);
 
-        assertLoan(loan, 1_000, 0.07, 30.87, 1111.57);
+        assertTrue(loan.isPresent());
+        assertLoan(loan.get(), 1_000, 0.07, 30.87, 1111.57);
     }
 
     @Test
@@ -39,9 +43,10 @@ public class LoanCalculatorIntegrationTest {
                 new Offer(0.07, 700),
                 new Offer(0.07, 300));
 
-        Loan loan = loanCalculator.calculate(offers, 36);
+        Optional<Loan> loan = loanCalculator.calculate(1_000, offers, 36);
 
-        assertLoan(loan, 1_000, 0.07, 30.87, 1111.57);
+        assertTrue(loan.isPresent());
+        assertLoan(loan.get(), 1_000, 0.07, 30.87, 1111.57);
     }
 
     @Test
@@ -55,9 +60,52 @@ public class LoanCalculatorIntegrationTest {
                 new Offer(0.1, 1000),
                 new Offer(0.05, 500));
 
-        Loan loan = loanCalculator.calculate(offers, 36);
+        Optional<Loan> loan = loanCalculator.calculate(1_500, offers, 36);
 
-        assertLoan(loan, 1_500, 0.083, 47.25, 1701.09);
+        assertTrue(loan.isPresent());
+        assertLoan(loan.get(), 1_500, 0.083, 47.25, 1701.09);
+    }
+
+    @Test
+    public void calculate_whenRequestedAmountIsGreaterThanTotalOffersAmount_loanShouldNotBePresent() {
+        // Available amount from offers: 100 + 200 = 300
+        List<Offer> offers = asList(
+                new Offer(0.1, 100),
+                new Offer(0.1, 200));
+
+        // Requesting 350
+        Optional<Loan> loan = loanCalculator.calculate(350, offers, 36);
+
+        assertFalse(loan.isPresent());
+    }
+
+    @Test
+    public void calculate_whenHaveMultipleOffers_shouldFirstUseOfferWithLowerRate() {
+        List<Offer> offers = asList(
+                new Offer(0.3, 2_000),
+                new Offer(0.2, 2_000),
+                new Offer(0.4, 2_000));
+
+        Optional<Loan> loan = loanCalculator.calculate(1_000, offers, 36);
+
+        assertTrue(loan.isPresent());
+        assertLoan(loan.get(), 1_000, 0.2, 37.16, 1337.89); // Offer with lower rate (0.2) is used
+    }
+
+    @Test
+    public void calculate_whenHaveMultipleOffers_shouldUseMultipleOffersWithLowerRate() {
+        List<Offer> offers = asList(
+                new Offer(0.3, 1_000),
+                new Offer(0.2, 1_000),
+                new Offer(0.4, 1_000));
+
+        Optional<Loan> loan = loanCalculator.calculate(2_000, offers, 36);
+
+        assertTrue(loan.isPresent());
+
+        // In order to get 2,000 in total - two offers of 1,000 should be used
+        // So offer of 1,000 (rate: 0.2) and another offer of 1,000 (rate: 0.3) are used
+        assertLoan(loan.get(), 2_000, 0.25, 79.61, 2866.15);
     }
 
     private static void assertLoan(Loan loan, double expectedRequestedAmount, double expectedRate,
