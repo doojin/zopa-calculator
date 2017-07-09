@@ -1,9 +1,6 @@
 package com.zopa.loan.data.converter;
 
 import com.zopa.loan.model.Offer;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +10,7 @@ import static junit.framework.TestCase.fail;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class CsvRecordToOfferConverterTest {
+public class CsvRecordToOfferConverterTest extends CsvConverterTest {
 
     private static final String FAILURE_EXCEPTION_EXPECTED = "Expecting exception to be thrown but it wasn't";
 
@@ -71,10 +68,6 @@ public class CsvRecordToOfferConverterTest {
 
         assertThat(offer.getRate(), equalTo(7.5D));
         assertThat(offer.getAmount(), equalTo(-500D));
-    }
-
-    private CSVRecord row(String... values) throws IOException {
-        return CSVParser.parse(String.join(",", values), CSVFormat.DEFAULT).getRecords().get(0);
     }
 
 }
