@@ -28,7 +28,7 @@ public class LoanCalculatorIntegrationTest {
     private LoanCalculator loanCalculator;
 
     @Test
-    public void calculate_oneOffer() {
+    public void calculate_whenOneOffer_itShouldBeUsed() {
         List<Offer> offers = singletonList(new Offer(0.07, 1_000));
 
         Optional<Loan> loan = loanCalculator.calculate(1_000, offers, 36);
@@ -46,6 +46,8 @@ public class LoanCalculatorIntegrationTest {
         Optional<Loan> loan = loanCalculator.calculate(1_000, offers, 36);
 
         assertTrue(loan.isPresent());
+
+        // Two offers were used. Both have rate: 7%. Final rate is 7%
         assertLoan(loan.get(), 1_000, 0.07, 30.87, 1111.57);
     }
 
@@ -53,8 +55,8 @@ public class LoanCalculatorIntegrationTest {
     public void calculate_multipleOffersWithDifferentRates() {
         // First offer: 1000 with 10% rate -> Payment will be: 1,161.62
         // Second offer: 500 with 5% rate -> Payment will be: 539.48
-        // Total payment is: 1,161.62 + 539.48 ~= 1,701 (it is 1,701 / 36 ~= 47.25 per month)
-        // If initial amount is 1,500 and payment is 1,701 then rate is ~= 8,3%
+        // Total payment is: 1,161.62 + 539.48 ~= 1,701 (which is: 1,701 / 36 ~= 47.25 per month)
+        // If initial amount is 1,500 and payment is 1,701 then final rate is ~= 8,3%
 
         List<Offer> offers = asList(
                 new Offer(0.1, 1000),
@@ -93,7 +95,7 @@ public class LoanCalculatorIntegrationTest {
     }
 
     @Test
-    public void calculate_whenHaveMultipleOffers_shouldUseMultipleOffersWithLowerRate() {
+    public void calculate_whenHaveMultipleOffers_shouldUseOffersWithLowerRate() {
         List<Offer> offers = asList(
                 new Offer(0.3, 1_000),
                 new Offer(0.2, 1_000),
