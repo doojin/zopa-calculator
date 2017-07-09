@@ -58,6 +58,34 @@ public class OfferFilterTest {
         assertOffer(filtered.get(2), 0.3, 300);
     }
 
+    @Test
+    public void filterByLowerRate_shouldNotIncludeOffersWithNegativeRate() {
+        List<Offer> offers = asList(
+                new Offer(-0.1, 100),
+                new Offer(0.1, 100),
+                new Offer(0.2, 100),
+                new Offer(-0.2, 100));
+
+        List<Offer> filtered = filter.filterByLowerRate(offers, 100);
+
+        assertThat(filtered.size(), equalTo(1));
+        assertOffer(filtered.get(0), 0.1, 100);
+    }
+
+    @Test
+    public void filterByLowerRate_shouldNotIncludeOffersWithNegativeAmount() {
+        List<Offer> offers = asList(
+                new Offer(0.1, -100),
+                new Offer(0.2, 100),
+                new Offer(0.3, -100),
+                new Offer(0.4, 100));
+
+        List<Offer> filtered = filter.filterByLowerRate(offers, 100);
+
+        assertThat(filtered.size(), equalTo(1));
+        assertOffer(filtered.get(0), 0.2, 100);
+    }
+
     private static void assertOffer(Offer offer, double expectedRate, double expectedAmount) {
         assertThat(offer.getRate(), equalTo(expectedRate));
         assertThat(offer.getAmount(), equalTo(expectedAmount));

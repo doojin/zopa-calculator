@@ -12,7 +12,11 @@ import static java.util.stream.Collectors.toList;
 public class OfferFilter {
 
     public List<Offer> filterByLowerRate(List<Offer> offers, double amount) {
-        List<Offer> sortedByRate = offers.stream().sorted(this::byRate).collect(toList());
+        List<Offer> sortedByRate = offers.stream()
+                .filter(this::withoutNegativeValues)
+                .sorted(this::byRate)
+                .collect(toList());
+
         List<Offer> lowerRateOffers = new ArrayList<>();
 
         for (Offer offer: sortedByRate) {
@@ -34,5 +38,9 @@ public class OfferFilter {
     private Offer createPartialOffer(double amount, Offer offer) {
         double partialAmount = Math.min(amount, offer.getAmount());
         return new Offer(offer.getRate(), partialAmount);
+    }
+
+    private boolean withoutNegativeValues(Offer offer) {
+        return offer.getRate() >= 0 && offer.getAmount() >= 0;
     }
 }
