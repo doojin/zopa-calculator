@@ -35,7 +35,7 @@ public class OfferDataReader implements FileDataReader<List<Offer>> {
         try {
             return new FileInputStream(file);
         } catch (FileNotFoundException e) {
-            throw new IllegalStateException(String.format("File '%s' was not found", filename), e);
+            throw new IllegalStateException(String.format("Your CSV data file: '%s' was not found", filename), e);
         }
     }
 }
