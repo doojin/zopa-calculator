@@ -37,7 +37,7 @@ public class OfferDataReaderTest {
             reader.read("nonexistent-file.csv");
             fail("Expected exception but wasn't thrown");
         } catch (Exception e) {
-            assertThat(e.getMessage(), equalTo("File 'nonexistent-file.csv' was not found"));
+            assertThat(e.getMessage(), equalTo("Your CSV data file: 'nonexistent-file.csv' was not found"));
         }
     }
 

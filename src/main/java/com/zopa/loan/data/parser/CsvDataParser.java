@@ -14,10 +14,14 @@ import java.util.List;
 @Component
 public class CsvDataParser implements DataParser<List<CSVRecord>> {
 
+    private static final String ERROR_INVALID_CSV_FILE = "Failed to parse your CSV file. Are you sure it's a valid CSV";
+
     @Override
-    public List<CSVRecord> parse(InputStream is) throws IOException {
+    public List<CSVRecord> parse(InputStream is)  {
         try (Reader reader = new InputStreamReader(is)) {
             return new CSVParser(reader, CSVFormat.DEFAULT).getRecords();
+        } catch (IOException e) {
+            throw new IllegalStateException(ERROR_INVALID_CSV_FILE, e);
         }
     }
 }

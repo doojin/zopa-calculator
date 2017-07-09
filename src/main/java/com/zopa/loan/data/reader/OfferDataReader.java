@@ -13,6 +13,8 @@ import java.util.List;
 @Component
 public class OfferDataReader implements FileDataReader<List<Offer>> {
 
+    private static final String ERROR_FILE_NOT_FOUND = "Your CSV data file: '%s' was not found";
+
     private final DataParser<List<CSVRecord>> csvParser;
     private final Converter<List<CSVRecord>, List<Offer>> converter;
 
@@ -23,7 +25,7 @@ public class OfferDataReader implements FileDataReader<List<Offer>> {
     }
 
     @Override
-    public List<Offer> read(String filename) throws IOException {
+    public List<Offer> read(String filename) {
         InputStream is = getInputStream(filename);
         List<CSVRecord> rows = csvParser.parse(is);
         return converter.convert(rows);
@@ -35,7 +37,7 @@ public class OfferDataReader implements FileDataReader<List<Offer>> {
         try {
             return new FileInputStream(file);
         } catch (FileNotFoundException e) {
-            throw new IllegalStateException(String.format("Your CSV data file: '%s' was not found", filename), e);
+            throw new IllegalStateException(String.format(ERROR_FILE_NOT_FOUND, filename), e);
         }
     }
 }
