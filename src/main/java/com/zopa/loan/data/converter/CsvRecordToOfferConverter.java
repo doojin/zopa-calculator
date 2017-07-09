@@ -47,7 +47,7 @@ public class CsvRecordToOfferConverter implements Converter<CSVRecord, Offer> {
         try {
             return parseDouble(value);
         } catch (NumberFormatException | NullPointerException e) {
-            throw new IllegalStateException(String.format(ERROR_INVALID_DECIMAL, fieldName, value));
+            throw new IllegalStateException(String.format(ERROR_INVALID_DECIMAL, fieldName, value), e);
         }
     }
 }

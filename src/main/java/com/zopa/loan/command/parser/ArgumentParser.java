@@ -39,7 +39,7 @@ public class ArgumentParser {
         try {
             return parseLong(arguments.get(ARGUMENT_INDEX_AMOUNT));
         } catch (NumberFormatException | NullPointerException e) {
-            throw new IllegalArgumentException(ERROR_INVALID_ARGUMENT_AMOUNT);
+            throw new IllegalArgumentException(ERROR_INVALID_ARGUMENT_AMOUNT, e);
         }
     }
 }
